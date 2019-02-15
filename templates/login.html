@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<meta name="google-signin-client_id" content="342920301945-al9ju2ll5c27smum2093vpuj28laui92.apps.googleusercontent.com.apps.googleusercontent.com">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+	</head>
+	<body>
+
+		<h3>Login</h3>
+
+		<div id="signinButton">
+          <span class="g-signin"
+            data-scope = "openid email"
+            data-clientid="342920301945-al9ju2ll5c27smum2093vpuj28laui92.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
+        </div>
+
+        <div id="result">
+
+        </div>
+
+
+        <script>
+        	function signInCallback(authResult) {
+  				if (authResult['code']) {
+    				$('#signinButton').attr('style', 'display: none');
+
+    				$.ajax({
+    					type: 'POST',
+    					url: '/gconnect?state={{state}}',
+    					processData: false,
+    					contentType: 'application/octet-stream; charset=utf-8',
+    					data: authResult['code'],
+    					success: function(results){
+    						if (result) {
+    							$('#result').html(`login worked! ${result}`)
+    							setTimeOut(function(){
+    								window.location.href='/';
+    							}, 5000);
+    						} else if (authResult['error']) {
+    							console.log('There was an error: ' + authResult['error']);
+    						}
+    						else {
+        						$('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         					}
+         				}
+    				})
+					}
+				}
+
+        </script>
+
+	</body>
+
+</html>
