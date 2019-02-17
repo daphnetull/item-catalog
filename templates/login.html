@@ -39,7 +39,7 @@
     					success: function(results){
     						if (result) {
     							$('#result').html(`login worked! ${result}`)
-    							setTimeOut(function(){
+    							setTimeout(function(){
     								window.location.href='/';
     							}, 5000);
     						} else if (authResult['error']) {

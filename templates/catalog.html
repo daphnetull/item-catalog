@@ -1,6 +1,17 @@
 <html>
 	<body>
-		
+		{% include "login.html" %}
+
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="flash">
+					{% for message in messages %}
+						<h2>{{ message }}</h2>
+					{% endfor %}
+				</div>
+			{% endif %}
+		{% endwith %}
+
 		<h3>Categories</h3>
 		<ul>
 		{% for c in category %}
