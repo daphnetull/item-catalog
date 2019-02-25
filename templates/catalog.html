@@ -1,7 +1,18 @@
 <html>
 	<body>
-		{% include "login.html" %}
 
+
+		<!-- displays logout link if logged in -->
+		{% if is_logged_in == True %}
+			<a href='{{url_for('gdisconnect')}}'>Logout</a>
+		{% endif %}
+
+		<!-- displays login link if logged out -->
+		{% if is_logged_in == False %}
+			<a href='{{url_for('login')}}'>Login</a>
+		{% endif %}
+
+		<!-- get flashed message of user's email from server -->
 		{% with messages = get_flashed_messages() %}
 			{% if messages %}
 				<div class="flash">
@@ -21,12 +32,6 @@
 		{% endfor %}
 		</ul>
 
-<!-- 		<h3>Items</h3>
-		<ul>
-		{% for i in items %}
-			<li>{{ i.name }}, {{ i.cat_id }}</li>
-		{% endfor %}
-		</ul> -->
 
 	</body>
 

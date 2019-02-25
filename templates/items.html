@@ -1,27 +1,48 @@
 <html>
 	<body>
-		
-		<h3>Items for Category</h3>
+
+		<h3>Items for {{ category.name }}</h3>
+
+		<!-- shows items with edit, delete, and add functionality if logged in -->
+		{% if is_logged_in == True %}
+			<h1>logged in!</h2>
+			<ul>
+				{% for i in items %}
+					<li>
+						{{ i.name }}
+						<a href='{{url_for('deleteItem', item_id=i.id, category_id=category.id) }}'>Delete</a>
+						<a href='{{url_for('editItem', item_id=i.id, category_id=category.id) }}'>Edit</a>
+					</li>
+				{% endfor %}
+			</ul>
+
+				<form action="{{url_for('items', category_id=category.id) }}" method = 'post'>
+
+					<input type="text" name="item-name" placeholder="Item Name">
+					<input type="text" name="item-description" placeholder="Item Description">
+					<input type="text" name="item-price" placeholder="Item Price">
+					<input type="text" name="item-company" placeholder="Company">
+
+					<input type="submit" value="add new item">
+
+				</form>
+		{% endif %}
+
+		<!-- show only list of items if not logged in -->
+		{% if is_logged_in == False %}
 		<ul>
-		{% for i in items %}
-			<li>
-				{{ i.name }} 
-				<a href='{{url_for('deleteItem', item_id=i.id, category_id=category.id) }}'>Delete</a>
-				<a href='{{url_for('editItem', item_id=i.id, category_id=category.id) }}'>Edit</a>
-			</li>
-		{% endfor %}
+			{% for i in items %}
+				<li>
+					{{ i.name }}
+
+				</li>
+			{% endfor %}
 		</ul>
+		{% endif %}
 
-		<form action="{{url_for('items', category_id=category.id) }}" method = 'post'>
 
-			<input type="text" name="item-name" placeholder="Item Name">
-			<input type="text" name="item-description" placeholder="Item Description">
-			<input type="text" name="item-price" placeholder="Item Price">
-			<input type="text" name="item-company" placeholder="Company">
 
-			<input type="submit" value="add new item">
 
-		</form>
 	</body>
 
 </html>

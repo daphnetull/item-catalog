@@ -1,13 +1,15 @@
 <html>
 	<head>
-		<meta name="google-signin-client_id" content="342920301945-al9ju2ll5c27smum2093vpuj28laui92.apps.googleusercontent.com.apps.googleusercontent.com">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="342920301945-al9ju2ll5c27smum2093vpuj28laui92.apps.googleusercontent.com">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 	</head>
 	<body>
 
-		<h3>Login</h3>
+		<h3>Click button to log in</h3>
 
+		<!-- Login buton and its attributes -->
 		<div id="signinButton">
           <span class="g-signin"
             data-scope = "openid email"
@@ -24,7 +26,7 @@
 
         </div>
 
-
+				<!-- callback function when button is clicked -->
         <script>
         	function signInCallback(authResult) {
   				if (authResult['code']) {
@@ -38,10 +40,10 @@
     					data: authResult['code'],
     					success: function(results){
     						if (result) {
-    							$('#result').html(`login worked! ${result}`)
-    							setTimeout(function(){
-    								window.location.href='/';
-    							}, 5000);
+          				$('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         					setTimeout(function() {
+          					window.location.href = "/";
+         					}, 4000);
     						} else if (authResult['error']) {
     							console.log('There was an error: ' + authResult['error']);
     						}

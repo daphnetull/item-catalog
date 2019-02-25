@@ -1,0 +1,20 @@
+<html>
+	<body>
+
+
+	<!-- only run if logout is successful  -->
+	{% if logged_out == True %}
+	<p>logged out</p>
+	<script>
+			setTimeout(function() {
+				window.location.href = "/";
+			}, 4000);
+	</script>
+
+	{% endif %}
+
+
+
+	</body>
+
+</html>
