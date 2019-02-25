@@ -10,7 +10,8 @@ from database_setup import Category, Base, Item
 
 # importing flask
 from flask import session as login_session
-import random, string
+import random
+import string
 
 # importing oauth libraries
 from oauth2client.client import flow_from_clientsecrets
